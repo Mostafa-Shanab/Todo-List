@@ -1,0 +1,129 @@
+@import url(./fonts.css);
+/* Start Global Rules */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+.container {
+  padding: 30px;
+}
+
+html {
+  font-size: 10px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.opacity-5 {
+  opacity: 0.5;
+}
+/* End Global Rules */
+
+/* Start header */
+header {
+  font-size: 5rem;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+nav ul img {
+  width: 101px;
+}
+/* End header */
+
+/* Start main */
+main {
+  background-color: rgb(245, 247, 249);
+  font-size: 2rem;
+  padding-block: 100px 30px;
+}
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.status > * {
+  flex: 1 0 calc(100% / 4);
+  padding-inline-end: 35px;
+}
+
+.status .task > div:not(:first-child) {
+  margin-block: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.status h2 {
+  font-weight: 400;
+  margin-block-end: 25px;
+}
+
+.status h3 {
+  font-weight: 400;
+  display: inline;
+}
+
+.status .priority {
+  display: inline-block;
+  width: 81px;
+  color: white;
+  text-align: center;
+  background-color: red;
+  padding-block: 5px;
+  border-radius: 25px;
+  font-size: 0.8em;
+}
+
+.status .done .task {
+  filter: opacity(0.5);
+}
+
+.status .notes .task {
+  padding-block-end: 100px;
+}
+
+.status .done .tasks i {
+  color: green;
+}
+
+.status .tasks button {
+  display: block;
+  margin: 35px auto;
+  cursor: pointer;
+  border: none;
+  font-size: 1em;
+}
+
+.status .task {
+  font-size: 0.8em;
+  background-color: white;
+  padding: 15px;
+  margin-block-end: 11px;
+  border-radius: 11px;
+  filter: drop-shadow(0px 0px 2px #c8c8c8);
+}
+
+.status .task i {
+  font-size: 1.5em;
+  margin-block-end: 5px;
+  margin-inline-end: 5px;
+  cursor: pointer;
+}
+
+.status .person img {
+  width: 35px;
+  border-radius: 50%;
+  height: 35px;
+}
+/* End main */

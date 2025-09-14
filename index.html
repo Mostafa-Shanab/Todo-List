@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Basic SEO -->
+    <title>Simple To-Do List App (ES6 JavaScript)</title>
+    <meta
+      name="description"
+      content="A simple and responsive To-Do list app built with ES6 JavaScript. Add, mark complete, and delete tasks easily. No frameworks required."
+    />
+    <!-- Keywords -->
+    <meta
+      name="keywords"
+      content="To-Do list, JavaScript ES6, task manager, vanilla JS, productivity app, simple todo app"
+    />
+    <!-- Author -->
+    <meta name="author" content="Mostafa Shanab" />
+    <!-- Open Graph (for social sharing) -->
+    <meta
+      property="og:title"
+      content="Simple To-Do List App (ES6 JavaScript)"
+    />
+    <meta
+      property="og:description"
+      content="A lightweight To-Do list built with pure ES6 JavaScript. Manage your daily tasks quickly and efficiently."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourwebsite.com/todo-list" />
+    <meta property="og:image" content="https://yourwebsite.com/preview.png" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Simple To-Do List App (ES6 JavaScript)"
+    />
+    <meta
+      name="twitter:description"
+      content="Add, manage, and delete your tasks with a simple ES6 To-Do list app."
+    />
+    <meta name="twitter:image" content="https://yourwebsite.com/preview.png" />
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <!-- FontAwesome Library -->
+    <link rel="stylesheet" href="/css/all.min.css" />
+    <!-- Main Template css file -->
+    <link rel="stylesheet" href="/css/main.css" />
+    <!-- Main JS -->
+    <script src="/scripts/main.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <ul>
+            <li>
+              <i class="fa-solid fa-bars"></i>
+            </li>
+            <li>
+              Hello,
+              <h1 style="display: inline-block; font-size: 1.5em">Name</h1>
+              !
+            </li>
+            <li>
+              <img src="/assets/images/chicken.png" alt="Profile Picture" />
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <div class="status">
+          <section class="todo">
+            <h2>To do</h2>
+            <div class="tasks">
+              <div class="task">
+                <div class="title">
+                  <i class="fa-regular fa-circle-check opacity-5"></i>
+                  <h3>Title of Task</h3>
+                </div>
+                <div class="priorities">
+                  <span class="priority">Medium</span>
+                  <span class="priority">Other</span>
+                </div>
+                <div class="person">
+                  <img src="./assets/images/chicken.png" alt="User Image" />
+                  <span class="opacity-5 date">Wednesday</span>
+                </div>
+              </div>
+              <button class="opacity-5">+ Add task</button>
+            </div>
+          </section>
+          <section class="in-progress">
+            <h2>In progress</h2>
+            <div class="tasks">
+              <button class="opacity-5">+ Add task</button>
+            </div>
+          </section>
+          <section class="done">
+            <h2>Done</h2>
+            <div class="tasks">
+              <button class="opacity-5">+ Add task</button>
+            </div>
+          </section>
+          <section class="notes">
+            <h2>Notes &amp; Reference</h2>
+            <div class="tasks">
+              <button class="opacity-5">+ Add task</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
