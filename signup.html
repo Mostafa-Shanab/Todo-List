@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up Page</title>
+    <!-- FontAwesome Library -->
+    <link rel="stylesheet" href="/css/all.min.css" />
+    <!-- Main Template css file -->
+    <link rel="stylesheet" href="/css/main.css" />
+    <!-- Main JS -->
+    <script src="/scripts/main.js" defer></script>
+
+    <style>
+      button {
+        display: block;
+        width: 200px;
+        height: 100px;
+        cursor: pointer;
+        border: none;
+        background-color: rgb(9, 206, 103);
+        color: rgb(255, 206, 0);
+        font-size: 2em;
+        border-radius: 25px;
+        transition: transform 0.5s;
+        margin-block: 55px;
+      }
+      button:hover {
+        transform: scale(1.1);
+      }
+      input {
+        padding: 11px;
+        font-size: 1em;
+        margin-block: 55px;
+        outline: none;
+      }
+      main {
+        padding-inline-start: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <ul>
+            <li>
+              <i class="fa-solid fa-bars"></i>
+            </li>
+            <li>
+              Hello,
+              <h1 style="display: inline-block; font-size: 1.5em">Name</h1>
+              !
+            </li>
+            <li>
+              <img src="/assets/images/chicken.png" alt="Profile Picture" />
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <aside class="vis">
+      <button
+        type="button"
+        id="login-btn"
+        onclick="window.location.href='login.html'"
+      >
+        Login
+      </button>
+      <button
+        type="button"
+        id="signup-btn"
+        onclick="window.location.href='signup.html'"
+      >
+        Signup
+      </button>
+      <button onclick="logout()">Logout</button>
+    </aside>
+    <main>
+      <div class="form-container">
+        <h2>Signup</h2>
+        <form id="signup-form">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" required />
+
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" required />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+
+          <button type="submit">Signup</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+      </div>
+    </main>
+  </body>
+</html>
