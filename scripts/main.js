@@ -15,7 +15,8 @@ class Task {
         hour: "2-digit",
         minute: "2-digit",
       });
-    this.person = document.querySelector("header img").getAttribute("src");
+    this.person =
+      document.querySelector("header img")?.getAttribute("src") || "";
   }
 
   // render task as HTML element
@@ -180,11 +181,7 @@ function saveTasksForUser(email) {
 }
 
 function renderTasks(tasks) {
-  document
-    .querySelectorAll(".tasks")
-    .forEach(
-      (el) => (el.innerHTML = '<button class="opacity-5">+ Add task</button>')
-    ); // clear
+  document.querySelectorAll(".tasks").forEach((el) => (el.innerHTML = "")); // clear
   tasks.forEach((t) => {
     const newTask = new Task(
       t.title,
@@ -196,6 +193,11 @@ function renderTasks(tasks) {
     const section = document.querySelector(`.${t.type || "todo"} .tasks`);
     if (section) section.appendChild(newTask.render());
   });
+  document
+    .querySelectorAll(".tasks")
+    .forEach(
+      (el) => (el.innerHTML += '<button class="opacity-5">+ Add task</button>')
+    );
 }
 
 const sections = document.querySelectorAll("section");
@@ -248,3 +250,67 @@ function logout() {
 //   );
 //   return newTask;
 // }
+const translations = {
+  en: {
+    hello: "Hello",
+    login: "Login",
+    signup: "Signup",
+    todo: "To do",
+    inProgress: "In progress",
+    done: "Done",
+    notes: "Notes & Reference",
+    addTask: "+ Add task",
+    editTask: "Edit task title:",
+    deleteConfirm: "Are you sure you want to delete this task?",
+    mustLogin: "You must log in first!",
+  },
+  ar: {
+    hello: "مرحباً",
+    login: "تسجيل الدخول",
+    signup: "إنشاء حساب",
+    todo: "المهام",
+    inProgress: "قيد التنفيذ",
+    done: "منجز",
+    notes: "ملاحظات ومرجع",
+    addTask: "+ أضف مهمة",
+    editTask: "عدل عنوان المهمة:",
+    deleteConfirm: "هل أنت متأكد أنك تريد حذف هذه المهمة؟",
+    mustLogin: "يجب تسجيل الدخول أولاً!",
+  },
+};
+
+let currentLang = localStorage.getItem("lang") || "en";
+
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem("lang", lang);
+
+  // غيّر النصوص حسب العناصر
+  document.querySelector("#login-btn").innerText = translations[lang].login;
+  document.querySelector("#signup-btn").innerText = translations[lang].signup;
+  document.querySelector(".todo h2").innerText = translations[lang].todo;
+  document.querySelector(".in-progress h2").innerText =
+    translations[lang].inProgress;
+  document.querySelector(".done h2").innerText = translations[lang].done;
+  document.querySelector(".notes h2").innerText = translations[lang].notes;
+
+  // كل أزرار إضافة مهمة
+  document.querySelectorAll(".tasks button").forEach((btn) => {
+    btn.innerText = translations[lang].addTask;
+  });
+
+  // لو الموقع عربي خلي الـ direction RTL
+  document.body.dir = lang === "ar" ? "rtl" : "ltr";
+}
+
+const langToggle = document.getElementById("lang-toggle");
+if (langToggle) {
+  langToggle.addEventListener("click", () => {
+    setLanguage(currentLang === "en" ? "ar" : "en");
+  });
+}
+
+// أول تحميل: طبق اللغة المحفوظة
+window.addEventListener("DOMContentLoaded", () => {
+  setLanguage(currentLang);
+});

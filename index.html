@@ -56,11 +56,11 @@
             <li>
               <i class="fa-solid fa-bars"></i>
             </li>
-            <li>
+            <!-- <li>
               Hello,
               <h1 style="display: inline-block; font-size: 1.5em">Name</h1>
               !
-            </li>
+            </li> -->
             <li>
               <img src="/assets/images/chicken.png" alt="Profile Picture" />
             </li>
@@ -69,21 +69,31 @@
       </div>
     </header>
     <aside class="vis">
-      <button
-        type="button"
-        id="login-btn"
-        onclick="window.location.href='login.html'"
+      <div
+        style="
+          display: flex;
+          flex-wrap: wrap;
+          gap: 25px;
+          justify-content: center;
+        "
       >
-        Login
-      </button>
-      <button
-        type="button"
-        id="signup-btn"
-        onclick="window.location.href='signup.html'"
-      >
-        Signup
-      </button>
-      <button onclick="logout()">Logout</button>
+        <button
+          type="button"
+          id="login-btn"
+          onclick="window.location.href='login.html'"
+        >
+          Login
+        </button>
+        <button
+          type="button"
+          id="signup-btn"
+          onclick="window.location.href='signup.html'"
+        >
+          Signup
+        </button>
+        <button onclick="logout()">Logout</button>
+        <button id="lang-toggle">عربي / English</button>
+      </div>
     </aside>
     <main>
       <div class="container">
