@@ -1,5 +1,40 @@
 "use strict";
 
+const translations = {
+  en: {
+    hello: "Hello",
+    login: "Login",
+    signup: "Signup",
+    logout: "Logout",
+    todo: "To do",
+    inProgress: "In progress",
+    done: "Done",
+    notes: "Notes & Reference",
+    addTask: "+ Add task",
+    editTask: "Edit task title:",
+    deleteConfirm: "Are you sure you want to delete this task?",
+    mustLogin: "You must log in first!",
+    tasktitle: "Enter Task title :",
+  },
+  ar: {
+    hello: "مرحباً",
+    login: "تسجيل الدخول",
+    signup: "إنشاء حساب",
+    logout: "تسجيل خروج",
+    todo: "المهام",
+    inProgress: "قيد التنفيذ",
+    done: "منجز",
+    notes: "ملاحظات ومرجع",
+    addTask: "+ أضف مهمة",
+    editTask: "عدل عنوان المهمة:",
+    deleteConfirm: "هل أنت متأكد أنك تريد حذف هذه المهمة؟",
+    mustLogin: "يجب تسجيل الدخول أولاً!",
+    tasktitle: "ادخل عنوان المهمة",
+  },
+};
+
+let currentLang = localStorage.getItem("lang") || "en";
+
 class Task {
   constructor(title, type, priorities = [], completed = false, date = null) {
     this.title = title;
@@ -60,7 +95,7 @@ class Task {
     // ✅ Edit task
     const editBtn = taskDiv.querySelector(".edit");
     editBtn.addEventListener("click", () => {
-      const newTitle = prompt("Edit task title:", this.title);
+      const newTitle = prompt(translations[currentLang].editTask, this.title);
       if (newTitle) {
         this.title = newTitle;
         taskDiv.querySelector("h3").innerText = newTitle;
@@ -71,7 +106,7 @@ class Task {
     // ✅ Delete task
     const deleteBtn = taskDiv.querySelector(".delete");
     deleteBtn.addEventListener("click", () => {
-      if (confirm("Are you sure you want to delete this task?")) {
+      if (confirm(translations[currentLang].deleteConfirm)) {
         taskDiv.remove();
         saveTasksForUser(currentUserEmail);
       }
@@ -163,17 +198,20 @@ function login(email, password) {
 }
 
 function saveTasksForUser(email) {
-  console.log("hi from save");
   let users = JSON.parse(localStorage.getItem("users")) || [];
   let user = users.find((u) => u.email === email);
   if (user) {
-    // collect tasks from DOM
-    console.log("hi from save2");
     let allTasks = [];
     document.querySelectorAll(".task").forEach((taskEl) => {
       const title = taskEl.querySelector("h3").innerText;
       const completed = taskEl.classList.contains("completed");
-      allTasks.push({ title, completed, type: "todo" }); // extend if needed
+      const date = taskEl.querySelector(".date").innerText;
+      const priorities = [...taskEl.querySelectorAll(".priority")].map(
+        (p) => p.innerText
+      );
+      const type = taskEl.closest("section").classList[0]; // type (todo / in-progress / done / notes)
+
+      allTasks.push({ title, completed, date, priorities, type });
     });
     user.tasks = allTasks;
     localStorage.setItem("users", JSON.stringify(users));
@@ -193,11 +231,12 @@ function renderTasks(tasks) {
     const section = document.querySelector(`.${t.type || "todo"} .tasks`);
     if (section) section.appendChild(newTask.render());
   });
-  document
-    .querySelectorAll(".tasks")
-    .forEach(
-      (el) => (el.innerHTML += '<button class="opacity-5">+ Add task</button>')
-    );
+  document.querySelectorAll(".tasks").forEach((el) => {
+    const addBtn = document.createElement("button");
+    addBtn.className = "opacity-5";
+    addBtn.textContent = translations[currentLang].addTask;
+    el.appendChild(addBtn);
+  });
 }
 
 const sections = document.querySelectorAll("section");
@@ -210,7 +249,8 @@ if (sections) {
           return;
         }
 
-        const title = prompt("Enter task title:");
+        // const title = prompt("Enter task title:");
+        const title = prompt(translations[currentLang].tasktitle);
         const priorities =
           prompt("Enter priorities (low, medium, high):") || "";
         if (!title) return;
@@ -250,36 +290,6 @@ function logout() {
 //   );
 //   return newTask;
 // }
-const translations = {
-  en: {
-    hello: "Hello",
-    login: "Login",
-    signup: "Signup",
-    todo: "To do",
-    inProgress: "In progress",
-    done: "Done",
-    notes: "Notes & Reference",
-    addTask: "+ Add task",
-    editTask: "Edit task title:",
-    deleteConfirm: "Are you sure you want to delete this task?",
-    mustLogin: "You must log in first!",
-  },
-  ar: {
-    hello: "مرحباً",
-    login: "تسجيل الدخول",
-    signup: "إنشاء حساب",
-    todo: "المهام",
-    inProgress: "قيد التنفيذ",
-    done: "منجز",
-    notes: "ملاحظات ومرجع",
-    addTask: "+ أضف مهمة",
-    editTask: "عدل عنوان المهمة:",
-    deleteConfirm: "هل أنت متأكد أنك تريد حذف هذه المهمة؟",
-    mustLogin: "يجب تسجيل الدخول أولاً!",
-  },
-};
-
-let currentLang = localStorage.getItem("lang") || "en";
 
 function setLanguage(lang) {
   currentLang = lang;
@@ -288,6 +298,7 @@ function setLanguage(lang) {
   // غيّر النصوص حسب العناصر
   document.querySelector("#login-btn").innerText = translations[lang].login;
   document.querySelector("#signup-btn").innerText = translations[lang].signup;
+  document.querySelector("#logout-btn").innerText = translations[lang].logout;
   document.querySelector(".todo h2").innerText = translations[lang].todo;
   document.querySelector(".in-progress h2").innerText =
     translations[lang].inProgress;
